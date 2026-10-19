@@ -68,24 +68,36 @@
         .drag-handle:active {
             cursor: grabbing;
         }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @media (max-width: 640px) {
+            input, select, textarea {
+                font-size: 16px !important; /* Sprječava automatsko zumiranje na iOS uređajima */
+            }
+        }
     </style>
 </head>
-<body class="text-slate-800 min-h-screen flex flex-col">
+<body class="text-slate-800 min-h-screen flex flex-col pb-20 lg:pb-0 overflow-x-hidden">
 
     <!-- ZAKLJUČANI ZASLON ZA ULAZAK U MERLINLIGHT (Bez ikakvih hintova za PIN) -->
-    <div id="studentLockScreen" class="fixed inset-0 bg-gradient-to-br from-merlin-900 via-merlin-800 to-slate-900 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-white/20 overflow-hidden animate-fade-in">
-            <div class="bg-merlin-800 px-6 py-6 text-center text-white relative">
-                <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-white/15 shadow-inner">
-                    <i class="ph ph-cube text-3xl text-sky-300"></i>
+    <div id="studentLockScreen" class="fixed inset-0 bg-gradient-to-br from-merlin-900 via-merlin-800 to-slate-900 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-white/20 overflow-hidden animate-fade-in my-auto">
+            <div class="bg-merlin-800 px-4 sm:px-6 py-5 sm:py-6 text-center text-white relative">
+                <div class="w-12 h-12 sm:w-14 sm:h-14 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-2.5 sm:mb-3 border border-white/15 shadow-inner">
+                    <i class="ph ph-cube text-2xl sm:text-3xl text-sky-300"></i>
                 </div>
                 <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-[10px] font-semibold uppercase tracking-wider text-sky-200 mb-1">
                     <span>UNIPU • Tehnički fakultet (TFPU)</span>
                 </div>
-                <h2 class="font-bold text-xl tracking-tight">Prototipno 3D modeliranje</h2>
-                <p class="text-xs text-sky-200 mt-0.5">Nositelj: prof. dr. sc. Sven Maričić • Asistent: Mateo Slivar</p>
+                <h2 class="font-bold text-lg sm:text-xl tracking-tight">Prototipno 3D modeliranje</h2>
+                <p class="text-[11px] sm:text-xs text-sky-200 mt-0.5">Nositelj: prof. dr. sc. Sven Maričić • Asistent: Mateo Slivar</p>
             </div>
-            <form onsubmit="verifyEntryPin(event)" class="p-6 space-y-4">
+            <form onsubmit="verifyEntryPin(event)" class="p-5 sm:p-6 space-y-4">
                 <div class="text-center space-y-1">
                     <span class="block text-xs font-bold uppercase tracking-wider text-slate-600">Autorizirani ulaz u kolegij</span>
                     <p class="text-[11px] text-slate-400">Pristup je dopušten autoriziranim korisnicima uz registriranu e-mail adresu i pristupni PIN</p>
@@ -105,7 +117,7 @@
                         <span id="entryPinErrorText">Pristup odbijen! E-mail nije na popisu ili je PIN netočan.</span>
                     </p>
                 </div>
-                <button type="submit" class="w-full py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider bg-merlin-600 hover:bg-merlin-700 text-white shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+                <button type="submit" class="w-full py-3.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider bg-merlin-600 hover:bg-merlin-700 active:scale-[0.99] text-white shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
                     <i class="ph ph-sign-in text-base"></i>
                     <span>Autoriziraj i uđi u kolegij</span>
                 </button>
@@ -113,33 +125,34 @@
         </div>
     </div>
 
-    <!-- Gornja navigacija (Merlin / Srce / TFPU stil) -->
+    <!-- Gornja navigacija (Merlin / Srce / TFPU stil - prilagođena mobitelima i tabletima) -->
     <header class="bg-merlin-800 text-white shadow-md sticky top-0 z-30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="bg-white/10 p-2 rounded-lg flex items-center justify-center">
-                    <i class="ph ph-cube text-2xl text-sky-300"></i>
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2">
+            <div class="flex items-center space-x-2.5 sm:space-x-3 min-w-0">
+                <div class="bg-white/10 p-1.5 sm:p-2 rounded-lg flex items-center justify-center shrink-0">
+                    <i class="ph ph-cube text-xl sm:text-2xl text-sky-300"></i>
                 </div>
-                <div>
-                    <span class="font-bold text-lg tracking-tight block leading-none">Merlin<span class="text-sky-400 font-normal">Light</span> <span class="text-xs font-semibold bg-sky-500/20 text-sky-200 px-2 py-0.5 rounded-md ml-1">TFPU</span></span>
-                    <span class="text-xs text-sky-200 block mt-0.5">Sveučilište Jurja Dobrile u Puli • Ak. god. 2026./2027.</span>
+                <div class="min-w-0">
+                    <span class="font-bold text-base sm:text-lg tracking-tight block leading-none truncate">Merlin<span class="text-sky-400 font-normal">Light</span> <span class="text-[10px] sm:text-xs font-semibold bg-sky-500/20 text-sky-200 px-1.5 sm:px-2 py-0.5 rounded-md ml-0.5">TFPU</span></span>
+                    <span class="text-[10px] sm:text-xs text-sky-200 block mt-0.5 truncate">UNIPU • Ak. god. 2026./2027.</span>
                 </div>
             </div>
 
             <!-- Desne akcije i prekidač za nastavnika -->
-            <div class="flex items-center space-x-2 sm:space-x-3">
-                <div id="loggedUserBadge" class="hidden md:flex items-center space-x-1.5 bg-merlin-900/50 px-3 py-1.5 rounded-xl border border-sky-700/40 text-xs text-sky-100">
+            <div class="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
+                <div id="loggedUserBadge" class="hidden lg:flex items-center space-x-1.5 bg-merlin-900/50 px-3 py-1.5 rounded-xl border border-sky-700/40 text-xs text-sky-100">
                     <i class="ph ph-check-circle text-emerald-400 text-sm"></i>
                     <span id="loggedUserEmail" class="truncate max-w-[180px]">student@unipu.hr</span>
                 </div>
                 <div class="flex items-center bg-merlin-900/60 p-1 rounded-xl border border-sky-700/50">
-                    <button id="btnStudentMode" onclick="setRole('student')" class="px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1.5 bg-sky-600 text-white shadow-sm">
+                    <button id="btnStudentMode" onclick="setRole('student')" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 bg-sky-600 text-white shadow-sm">
                         <i class="ph ph-student text-sm"></i>
                         <span>Student</span>
                     </button>
-                    <button id="btnTeacherMode" onclick="requestTeacherAccess()" class="px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1.5 text-sky-200 hover:text-white">
+                    <button id="btnTeacherMode" onclick="requestTeacherAccess()" class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 text-sky-200 hover:text-white">
                         <i class="ph ph-lock-key text-sm" id="teacherLockIcon"></i>
-                        <span>Nastavnik (Uredi)</span>
+                        <span class="hidden sm:inline">Nastavnik (Uredi)</span>
+                        <span class="sm:hidden">Uredi</span>
                     </button>
                 </div>
                 <button onclick="lockMerlinSession()" class="p-2 rounded-xl bg-merlin-900/60 hover:bg-rose-600/80 text-sky-200 hover:text-white border border-sky-700/50 transition" title="Odjava / Zaključaj MerlinLight">
@@ -151,109 +164,115 @@
 
     <!-- Zaglavlje kolegija -->
     <div class="bg-white border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-            <nav class="text-xs text-slate-500 mb-2 flex flex-wrap items-center gap-1.5">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-5">
+            <nav class="text-[11px] sm:text-xs text-slate-500 mb-1.5 sm:mb-2 flex flex-wrap items-center gap-1 sm:gap-1.5">
                 <span class="hover:text-merlin-600 cursor-pointer">UNIPU TFPU</span>
                 <i class="ph ph-caret-right text-[10px]"></i>
-                <span class="hover:text-merlin-600 cursor-pointer">Diplomski studij strojarstva (2. god. / III. sem.)</span>
+                <span class="hover:text-merlin-600 cursor-pointer truncate max-w-[200px] sm:max-w-none">Diplomski studij strojarstva</span>
                 <i class="ph ph-caret-right text-[10px]"></i>
                 <span class="font-semibold text-merlin-700" id="breadcrumbCode">DS033 / DAKD309</span>
             </nav>
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3.5 sm:gap-4">
                 <div>
-                    <div class="flex items-center gap-2.5">
-                        <h1 class="text-2xl sm:text-3xl font-bold text-slate-900" id="courseTitle">Prototipno 3D modeliranje</h1>
-                        <button onclick="openCourseInfoModal()" class="teacher-only hidden text-slate-400 hover:text-merlin-600 p-1 rounded-lg hover:bg-slate-100" title="Uredi podatke o kolegiju">
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 leading-tight" id="courseTitle">Prototipno 3D modeliranje</h1>
+                        <button onclick="openCourseInfoModal()" class="teacher-only hidden text-slate-400 hover:text-merlin-600 p-1.5 rounded-lg hover:bg-slate-100 shrink-0" title="Uredi podatke o kolegiju">
                             <i class="ph ph-pencil-simple text-lg"></i>
                         </button>
                     </div>
-                    <p class="text-sm text-slate-600 mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1">
-                        <span class="inline-flex items-center gap-1"><i class="ph ph-user-circle text-merlin-600 text-base"></i> Nositelj: <strong id="courseLecturer">prof. dr. sc. Sven Maričić</strong></span>
-                        <span class="inline-flex items-center gap-1"><i class="ph ph-chalkboard-teacher text-emerald-600 text-base"></i> Asistent: <strong id="courseAssistant">Mateo Slivar, mag. ing. mech.</strong></span>
-                        <span class="inline-flex items-center gap-1"><i class="ph ph-map-pin text-merlin-600 text-base"></i> Dvorana: <strong id="courseRoom">Predavanja: 314 / Vježbe: 312</strong></span>
-                        <span class="inline-flex items-center gap-1"><i class="ph ph-clock text-merlin-600 text-base"></i> Termin: <strong>Petak 16:00–19:00h</strong></span>
-                        <span id="courseDeliveryBadge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
-                            <i class="ph ph-buildings text-sm"></i>
-                            <span>Nastava: Onsite (Uživo na TFPU)</span>
-                        </span>
-                    </p>
+                    <div class="text-xs sm:text-sm text-slate-600 mt-2 grid grid-cols-1 sm:flex sm:flex-wrap items-start sm:items-center gap-x-4 gap-y-1.5">
+                        <span class="inline-flex items-center gap-1.5"><i class="ph ph-user-circle text-merlin-600 text-base shrink-0"></i> <span>Nositelj: <strong id="courseLecturer">prof. dr. sc. Sven Maričić</strong></span></span>
+                        <span class="inline-flex items-center gap-1.5"><i class="ph ph-chalkboard-teacher text-emerald-600 text-base shrink-0"></i> <span>Asistent: <strong id="courseAssistant">Mateo Slivar, mag. ing. mech.</strong></span></span>
+                        <span class="inline-flex items-center gap-1.5"><i class="ph ph-map-pin text-merlin-600 text-base shrink-0"></i> <span>Dvorana: <strong id="courseRoom">Predavanja: 314 / Vježbe: 312</strong></span></span>
+                        <span class="inline-flex items-center gap-1.5"><i class="ph ph-clock text-merlin-600 text-base shrink-0"></i> <span>Termin: <strong>Petak 16:00–19:00h</strong></span></span>
+                        <div class="pt-0.5 sm:pt-0">
+                            <span id="courseDeliveryBadge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                <i class="ph ph-buildings text-sm"></i>
+                                <span>Nastava: Onsite (Uživo na TFPU)</span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex flex-wrap items-center gap-2">
-                    <div class="teacher-only hidden flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200" title="Brza promjena načina izvođenja nastave">
-                        <button type="button" id="modeBtnOnsite" onclick="setDeliveryMode('onsite')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition">
-                            Onsite (Dvorana)
+                <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 pt-1 lg:pt-0">
+                    <div class="teacher-only hidden flex items-center justify-between sm:justify-start bg-slate-100 p-1 rounded-xl border border-slate-200" title="Brza promjena načina izvođenja nastave">
+                        <button type="button" id="modeBtnOnsite" onclick="setDeliveryMode('onsite')" class="flex-1 sm:flex-initial px-2.5 py-1.5 rounded-lg text-[11px] font-semibold transition text-center">
+                            Onsite
                         </button>
-                        <button type="button" id="modeBtnOnline" onclick="setDeliveryMode('online')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition">
+                        <button type="button" id="modeBtnOnline" onclick="setDeliveryMode('online')" class="flex-1 sm:flex-initial px-2.5 py-1.5 rounded-lg text-[11px] font-semibold transition text-center">
                             Online (Meet)
                         </button>
-                        <button type="button" id="modeBtnHybrid" onclick="setDeliveryMode('hybrid')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold transition">
+                        <button type="button" id="modeBtnHybrid" onclick="setDeliveryMode('hybrid')" class="flex-1 sm:flex-initial px-2.5 py-1.5 rounded-lg text-[11px] font-semibold transition text-center">
                             Hibridno
                         </button>
                     </div>
-                    <a id="headerMeetBtn" href="https://meet.google.com/aaj-kqej-vmq" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-sky-600 hover:bg-sky-700 text-white px-3.5 py-2 rounded-xl text-sm font-semibold transition shadow-sm">
-                        <i class="ph ph-video-camera text-lg"></i>
-                        <span id="headerMeetBtnText">Online nastava (Google Meet)</span>
-                        <i class="ph ph-arrow-square-out text-xs opacity-80"></i>
-                    </a>
-                    <button onclick="openStudentsModal()" class="teacher-only hidden inline-flex items-center space-x-2 bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 px-3.5 py-2 rounded-xl text-xs font-semibold transition shadow-xs">
+                    <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+                        <a id="headerMeetBtn" href="https://meet.google.com/aaj-kqej-vmq" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center space-x-1.5 bg-sky-600 hover:bg-sky-700 text-white px-3 py-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm">
+                            <i class="ph ph-video-camera text-base sm:text-lg shrink-0"></i>
+                            <span id="headerMeetBtnText" class="truncate">Google Meet</span>
+                            <i class="ph ph-arrow-square-out text-xs opacity-80 shrink-0 hidden sm:inline"></i>
+                        </a>
+                        <a id="mainDriveFolderBtn" href="https://drive.google.com/drive/folders/1AtML6dkYvZgIjBv-n3xiDc3BlUyR8VOD?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center space-x-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 px-3 py-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-medium transition shadow-sm">
+                            <i class="ph ph-google-drive-logo text-base sm:text-lg text-emerald-600 shrink-0"></i>
+                            <span class="truncate">G-Drive mapa</span>
+                            <i class="ph ph-arrow-square-out text-xs opacity-70 shrink-0 hidden sm:inline"></i>
+                        </a>
+                    </div>
+                    <button onclick="openStudentsModal()" class="teacher-only hidden inline-flex items-center justify-center space-x-2 bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 px-3.5 py-2.5 sm:py-2 rounded-xl text-xs font-semibold transition shadow-xs">
                         <i class="ph ph-users-three text-base text-merlin-600"></i>
                         <span>Popis studenata (<span id="studentCountBadge">0</span>)</span>
                     </button>
-                    <a id="mainDriveFolderBtn" href="https://drive.google.com/drive/folders/1AtML6dkYvZgIjBv-n3xiDc3BlUyR8VOD?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 px-3.5 py-2 rounded-xl text-sm font-medium transition shadow-sm">
-                        <i class="ph ph-google-drive-logo text-lg text-emerald-600"></i>
-                        <span>G-Drive mapa kolegija</span>
-                        <i class="ph ph-arrow-square-out text-xs opacity-70"></i>
-                    </a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Glavni sadržaj -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 flex-1 w-full">
         
         <!-- Traka obavijesti i GitHub alata za Nastavnički mod -->
-        <div id="teacherBanner" class="teacher-only hidden mb-6 bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-3 animate-fade-in shadow-xs">
+        <div id="teacherBanner" class="teacher-only hidden mb-5 sm:mb-6 bg-amber-50 border border-amber-200 rounded-2xl p-3.5 sm:p-4 space-y-3 animate-fade-in shadow-xs">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <div class="flex items-center space-x-3">
-                    <div class="bg-amber-100 text-amber-700 p-2.5 rounded-xl">
-                        <i class="ph ph-wrench text-xl"></i>
+                <div class="flex items-start sm:items-center space-x-2.5 sm:space-x-3">
+                    <div class="bg-amber-100 text-amber-700 p-2 sm:p-2.5 rounded-xl shrink-0">
+                        <i class="ph ph-wrench text-lg sm:text-xl"></i>
                     </div>
                     <div>
                         <div class="flex items-center gap-2 flex-wrap">
-                            <h3 class="text-sm font-bold text-amber-950">Nastavnički način rada (prof. dr. sc. Sven Maričić / Mateo Slivar)</h3>
+                            <h3 class="text-xs sm:text-sm font-bold text-amber-950">Nastavnički način rada (Sven Maričić / Mateo Slivar)</h3>
                             <span id="draftStatusBadge" class="px-2 py-0.5 text-[10px] font-semibold bg-amber-200/80 text-amber-900 rounded-md">Spremno za GitHub Pages</span>
                         </div>
-                        <p class="text-xs text-amber-800 mt-0.5">Povucite module mišem (<strong>Drag &amp; Drop</strong>), upravljajte popisom autoriziranih studenata (Excel <code>DS033</code> i <code>DAKD309</code>) te preuzmite ažuriranu datoteku za GitHub.</p>
+                        <p class="text-[11px] sm:text-xs text-amber-800 mt-0.5">Povucite module mišem ili koristite strelice (<i class="ph ph-arrow-up"></i>/<i class="ph ph-arrow-down"></i>) na mobitelu, upravljajte popisom studenata te preuzmite ažuriranu datoteku.</p>
                     </div>
                 </div>
-                <div class="flex flex-wrap items-center gap-2 shrink-0">
-                    <button onclick="openStudentsModal()" class="text-xs font-semibold text-white bg-merlin-600 hover:bg-merlin-700 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 shadow-xs">
+                <div class="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2 w-full sm:w-auto shrink-0">
+                    <button onclick="openStudentsModal()" class="text-xs font-semibold text-white bg-merlin-600 hover:bg-merlin-700 px-3 py-2 sm:py-1.5 rounded-xl transition flex items-center justify-center gap-1.5 shadow-xs">
                         <i class="ph ph-file-xls text-sm"></i>
-                        <span>Upravljaj studentima / Uvezi Excel (.xlsx)</span>
+                        <span>Upravljaj studentima / Excel (.xlsx)</span>
                     </button>
-                    <button onclick="openGithubGuideModal()" class="text-xs font-medium text-amber-900 bg-amber-100 hover:bg-amber-200/80 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
-                        <i class="ph ph-github-logo text-sm"></i>
-                        <span>Upute za GitHub</span>
-                    </button>
-                    <button onclick="resetDemoData()" class="text-xs font-medium text-rose-700 hover:text-rose-900 bg-rose-100/70 hover:bg-rose-200/70 px-3 py-1.5 rounded-xl transition">
-                        Vrati početno
-                    </button>
+                    <div class="grid grid-cols-2 sm:flex gap-2">
+                        <button onclick="openGithubGuideModal()" class="text-xs font-medium text-amber-900 bg-amber-100 hover:bg-amber-200/80 px-3 py-2 sm:py-1.5 rounded-xl transition flex items-center justify-center gap-1.5">
+                            <i class="ph ph-github-logo text-sm"></i>
+                            <span>Upute za GitHub</span>
+                        </button>
+                        <button onclick="resetDemoData()" class="text-xs font-medium text-rose-700 hover:text-rose-900 bg-rose-100/70 hover:bg-rose-200/70 px-3 py-2 sm:py-1.5 rounded-xl transition text-center">
+                            Vrati početno
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- GitHub Pages alatna traka za spremanje -->
-            <div class="pt-3 border-t border-amber-200/80 flex flex-wrap items-center justify-between gap-2">
+            <div class="pt-3 border-t border-amber-200/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
                 <span class="text-xs text-amber-900 font-medium flex items-center gap-1.5">
-                    <i class="ph ph-cloud-arrow-up text-base text-amber-700"></i>
-                    <span>Objavi promjene i popis studenata na GitHub Pagesu:</span>
+                    <i class="ph ph-cloud-arrow-up text-base text-amber-700 shrink-0"></i>
+                    <span>Objavi promjene na GitHub Pagesu:</span>
                 </span>
-                <div class="flex flex-wrap items-center gap-2">
-                    <button onclick="exportUpdatedHtmlFile()" class="inline-flex items-center space-x-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-2 rounded-xl transition shadow-xs">
+                <div class="grid grid-cols-1 sm:flex items-center gap-2">
+                    <button onclick="exportUpdatedHtmlFile()" class="inline-flex items-center justify-center space-x-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-2.5 sm:py-2 rounded-xl transition shadow-xs">
                         <i class="ph ph-file-html text-sm text-sky-400"></i>
                         <span>1. Preuzmi ažurirani index.html</span>
                     </button>
-                    <button onclick="exportCourseJson()" class="inline-flex items-center space-x-1.5 bg-white hover:bg-amber-100/50 text-slate-800 border border-amber-300 text-xs font-semibold px-3.5 py-2 rounded-xl transition">
+                    <button onclick="exportCourseJson()" class="inline-flex items-center justify-center space-x-1.5 bg-white hover:bg-amber-100/50 text-slate-800 border border-amber-300 text-xs font-semibold px-3.5 py-2.5 sm:py-2 rounded-xl transition">
                         <i class="ph ph-file-js text-sm text-amber-600"></i>
                         <span>2. Preuzmi course-data.json</span>
                     </button>
@@ -261,21 +280,21 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
             
             <!-- LIJEVI / SREDIŠNJI DIO (G-Drive podmape + Obavijesti + Ishodi + Materijali po cjelinama) - 8 stupaca -->
-            <div class="lg:col-span-8 space-y-6">
+            <div id="mobileSectionContent" class="lg:col-span-8 space-y-5 sm:space-y-6">
                 
                 <!-- KARTICA: 3 GLAVNE GOOGLE DRIVE PODMAPE U OBLAKU (Predavanja, Vježbe, Podcast) -->
-                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
+                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm p-3.5 sm:p-5">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3.5">
                         <div class="flex items-center space-x-2.5">
-                            <div class="bg-emerald-100 text-emerald-700 p-2 rounded-xl">
+                            <div class="bg-emerald-100 text-emerald-700 p-2 rounded-xl shrink-0">
                                 <i class="ph ph-folders text-lg"></i>
                             </div>
                             <div>
-                                <h2 class="font-bold text-slate-800 text-sm sm:text-base">Google Drive repozitorij kolegija (3 podmape u oblaku)</h2>
-                                <p class="text-xs text-slate-500">Izravan pristup materijalima podijeljenim u mape: <strong>Predavanja</strong>, <strong>Vježbe</strong> i <strong>Podcast</strong></p>
+                                <h2 class="font-bold text-slate-800 text-sm sm:text-base">Google Drive repozitorij kolegija</h2>
+                                <p class="text-[11px] sm:text-xs text-slate-500">Izravan pristup mapama: <strong>Predavanja</strong>, <strong>Vježbe</strong> i <strong>Podcast</strong></p>
                             </div>
                         </div>
                         <a href="https://drive.google.com/drive/folders/1AtML6dkYvZgIjBv-n3xiDc3BlUyR8VOD?usp=drive_link" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1 hover:underline shrink-0">
@@ -283,10 +302,10 @@
                             <i class="ph ph-arrow-up-right"></i>
                         </a>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <a href="https://drive.google.com/drive/folders/1CIQYFsvTBNz6RDa11JrTGh1cTBevIxpH" target="_blank" rel="noopener noreferrer" class="group p-3.5 rounded-xl border border-sky-200 bg-sky-50/60 hover:bg-sky-100/80 transition flex items-center justify-between">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+                        <a href="https://drive.google.com/drive/folders/1CIQYFsvTBNz6RDa11JrTGh1cTBevIxpH" target="_blank" rel="noopener noreferrer" class="group p-3 sm:p-3.5 rounded-xl border border-sky-200 bg-sky-50/60 hover:bg-sky-100/80 active:scale-[0.99] transition flex items-center justify-between">
                             <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition">
+                                <div class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition shrink-0">
                                     <i class="ph ph-presentation-chart text-xl"></i>
                                 </div>
                                 <div>
@@ -296,9 +315,9 @@
                             </div>
                             <i class="ph ph-arrow-square-out text-sky-700 text-base group-hover:translate-x-0.5 transition"></i>
                         </a>
-                        <a href="https://drive.google.com/drive/folders/1lS2PVilYJhV38PXfhnOCdtLnhkSmM8O2" target="_blank" rel="noopener noreferrer" class="group p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100/80 transition flex items-center justify-between">
+                        <a href="https://drive.google.com/drive/folders/1lS2PVilYJhV38PXfhnOCdtLnhkSmM8O2" target="_blank" rel="noopener noreferrer" class="group p-3 sm:p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100/80 active:scale-[0.99] transition flex items-center justify-between">
                             <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition shrink-0">
                                     <i class="ph ph-cube-focus text-xl"></i>
                                 </div>
                                 <div>
@@ -308,9 +327,9 @@
                             </div>
                             <i class="ph ph-arrow-square-out text-emerald-700 text-base group-hover:translate-x-0.5 transition"></i>
                         </a>
-                        <a href="https://drive.google.com/drive/folders/1OFOMhtSco_GfUHS4OuWrDhO-ZI-fn-SH" target="_blank" rel="noopener noreferrer" class="group p-3.5 rounded-xl border border-purple-200 bg-purple-50/60 hover:bg-purple-100/80 transition flex items-center justify-between">
+                        <a href="https://drive.google.com/drive/folders/1OFOMhtSco_GfUHS4OuWrDhO-ZI-fn-SH" target="_blank" rel="noopener noreferrer" class="group p-3 sm:p-3.5 rounded-xl border border-purple-200 bg-purple-50/60 hover:bg-purple-100/80 active:scale-[0.99] transition flex items-center justify-between">
                             <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition">
+                                <div class="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition shrink-0">
                                     <i class="ph ph-microphone-stage text-xl"></i>
                                 </div>
                                 <div>
@@ -324,34 +343,34 @@
                 </section>
 
                 <!-- Brzi filtri / Pretraživanje -->
-                <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div class="bg-white p-3 sm:p-3.5 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3">
                     <div class="relative w-full sm:w-72">
                         <i class="ph ph-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                        <input type="text" id="searchInput" oninput="renderAll()" placeholder="Pretraži 15 tema, vježbe, podcast ili obavijesti..." class="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500 focus:bg-white transition">
+                        <input type="text" id="searchInput" oninput="renderAll()" placeholder="Pretraži teme, vježbe, podcast..." class="w-full pl-9 pr-4 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500 focus:bg-white transition">
                     </div>
-                    <div class="flex items-center space-x-1.5 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
-                        <button onclick="setFilterType('all')" id="filter-all" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-merlin-600 text-white transition">Sve</button>
-                        <button onclick="setFilterType('predavanje')" id="filter-predavanje" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Predavanja</button>
-                        <button onclick="setFilterType('vjezbe')" id="filter-vjezbe" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Vježbe / CAD</button>
-                        <button onclick="setFilterType('video')" id="filter-video" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Podcast</button>
+                    <div class="flex items-center space-x-1.5 w-full sm:w-auto overflow-x-auto no-scrollbar pb-0.5 sm:pb-0">
+                        <button onclick="setFilterType('all')" id="filter-all" class="filter-btn shrink-0 px-3.5 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-merlin-600 text-white transition">Sve</button>
+                        <button onclick="setFilterType('predavanje')" id="filter-predavanje" class="filter-btn shrink-0 px-3.5 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Predavanja</button>
+                        <button onclick="setFilterType('vjezbe')" id="filter-vjezbe" class="filter-btn shrink-0 px-3.5 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Vježbe / CAD</button>
+                        <button onclick="setFilterType('video')" id="filter-video" class="filter-btn shrink-0 px-3.5 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Podcast</button>
                     </div>
                 </div>
 
                 <!-- SEKCIJA 1: OBAVIJESTI S NASTAVE -->
-                <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                    <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-slate-50 to-white">
-                        <div class="flex items-center space-x-2.5">
-                            <div class="bg-amber-100 text-amber-600 p-2 rounded-xl">
+                <section id="sectionAnnouncements" class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-20">
+                    <div class="px-4 sm:px-5 py-3.5 sm:py-4 border-b border-slate-100 flex items-center justify-between gap-2 bg-gradient-to-r from-slate-50 to-white">
+                        <div class="flex items-center space-x-2.5 min-w-0">
+                            <div class="bg-amber-100 text-amber-600 p-2 rounded-xl shrink-0">
                                 <i class="ph ph-megaphone text-lg"></i>
                             </div>
-                            <div>
-                                <h2 class="font-bold text-slate-800 text-base">Obavijesti na kolegiju</h2>
-                                <p class="text-xs text-slate-500">Informacije o nastavi petkom i obavijesti za studente</p>
+                            <div class="min-w-0">
+                                <h2 class="font-bold text-slate-800 text-sm sm:text-base truncate">Obavijesti na kolegiju</h2>
+                                <p class="text-[11px] sm:text-xs text-slate-500 truncate">Informacije o nastavi petkom i obavijesti</p>
                             </div>
                         </div>
-                        <button onclick="openAnnouncementModal()" class="teacher-only hidden inline-flex items-center space-x-1.5 bg-merlin-600 hover:bg-merlin-700 text-white text-xs font-medium px-3 py-2 rounded-xl transition shadow-sm">
+                        <button onclick="openAnnouncementModal()" class="teacher-only hidden inline-flex items-center space-x-1.5 bg-merlin-600 hover:bg-merlin-700 text-white text-xs font-medium px-3 py-2 rounded-xl transition shadow-sm shrink-0">
                             <i class="ph ph-plus-bold"></i>
-                            <span>Nova obavijest</span>
+                            <span>Nova</span>
                         </button>
                     </div>
 
@@ -362,18 +381,18 @@
 
                 <!-- KARTICA CILJA KOLEGIJA I OČEKIVANIH ISHODA UČENJA (I1 - I6) -->
                 <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                    <div class="px-5 py-3.5 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-merlin-50/60 to-white">
+                    <div class="px-4 sm:px-5 py-3.5 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-merlin-50/60 to-white">
                         <div class="flex items-center space-x-2.5">
-                            <div class="bg-merlin-100 text-merlin-700 p-2 rounded-xl">
+                            <div class="bg-merlin-100 text-merlin-700 p-2 rounded-xl shrink-0">
                                 <i class="ph ph-target text-lg"></i>
                             </div>
                             <div>
-                                <h2 class="font-bold text-slate-800 text-sm sm:text-base">Cilj kolegija i očekivani ishodi učenja (I1 – I6)</h2>
-                                <p class="text-xs text-slate-500">3D modeliranje, 3D skeniranje, aditivna proizvodnja i rješenja otvorenog koda</p>
+                                <h2 class="font-bold text-slate-800 text-sm sm:text-base">Cilj kolegija i ishodi učenja (I1 – I6)</h2>
+                                <p class="text-[11px] sm:text-xs text-slate-500">3D modeliranje, 3D skeniranje, aditivna proizvodnja i otvoreni kod</p>
                             </div>
                         </div>
                     </div>
-                    <div class="p-4 sm:p-5 space-y-3">
+                    <div class="p-3.5 sm:p-5 space-y-3">
                         <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
                             <strong>Cilj kolegija:</strong> Razumijevanje osnovnih i naprednih principa izrade funkcionalnih trodimenzionalnih modela te upoznavanje računalnih alata (uključujući rješenja otvorenog koda) za 3D modeliranje, 3D skeniranje i aditivnu proizvodnju.
                         </p>
@@ -407,16 +426,16 @@
                 </section>
 
                 <!-- SEKCIJA 2: NASTAVNI MATERIJALI (GOOGLE DRIVE POVEZNICE - Poglavlja 1 do 4) -->
-                <section class="space-y-4">
-                    <div class="flex items-center justify-between px-1">
+                <section id="sectionMaterials" class="space-y-3.5 sm:space-y-4 scroll-mt-20">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1">
                         <div>
-                            <h2 class="font-bold text-slate-800 text-lg flex items-center gap-2">
-                                <i class="ph ph-books text-merlin-600 text-xl"></i>
-                                <span>Nastavni materijali, predavanja i vježbe (Teme 1–15)</span>
+                            <h2 class="font-bold text-slate-800 text-base sm:text-lg flex items-center gap-2">
+                                <i class="ph ph-books text-merlin-600 text-xl shrink-0"></i>
+                                <span>Nastavni materijali i vježbe (Teme 1–15)</span>
                             </h2>
-                            <p class="text-xs text-slate-500">Klikom na materijal otvara se prezentacija, vježba ili podcast epizoda u G-Drive mapi</p>
+                            <p class="text-[11px] sm:text-xs text-slate-500">Klikom na materijal otvara se prezentacija, vježba ili podcast u G-Drive mapi</p>
                         </div>
-                        <button onclick="openWeekModal()" class="teacher-only hidden inline-flex items-center space-x-1.5 bg-merlin-600 hover:bg-merlin-700 text-white text-xs font-medium px-3.5 py-2 rounded-xl transition shadow-sm">
+                        <button onclick="openWeekModal()" class="teacher-only hidden inline-flex items-center justify-center space-x-1.5 bg-merlin-600 hover:bg-merlin-700 text-white text-xs font-medium px-3.5 py-2.5 sm:py-2 rounded-xl transition shadow-sm shrink-0">
                             <i class="ph ph-folder-plus text-base"></i>
                             <span>Dodaj poglavlje / cjelinu</span>
                         </button>
@@ -429,29 +448,10 @@
             </div>
 
             <!-- DESNI STUPAC (Kalendar nastave i Google Kalendar integracija) - 4 stupca -->
-            <div class="lg:col-span-4 space-y-6 lg:sticky lg:top-22">
+            <div id="mobileSectionSidebar" class="lg:col-span-4 space-y-5 sm:space-y-6 lg:sticky lg:top-22">
                 
                 <!-- KARTICA KALENDARA -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                    <div class="p-4 border-b border-slate-100 bg-gradient-to-r from-merlin-50/70 to-white flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <div class="bg-merlin-100 text-merlin-700 p-2 rounded-xl">
-                                <i class="ph ph-calendar-check text-lg"></i>
-                            </div>
-                            <div>
-                                <h2 class="font-bold text-slate-800 text-sm">Kalendar nastave</h2>
-                                <p class="text-[11px] text-slate-500">Raspored predavanja, vježbi i ispita</p>
-                            </div>
-                        </div>
-                        <button onclick="openEventModal()" class="teacher-only hidden inline-flex items-center space-x-1 bg-merlin-600 hover:bg-merlin-700 text-white text-xs font-medium px-2.5 py-1.5 rounded-lg transition shadow-sm" title="Dodaj termin nastave">
-                            <i class="ph ph-plus"></i>
-                            <span>Termin</span>
-                        </button>
-                    </div>
-
-                    <!-- Kontrole mjeseca -->
-                    <div class="p-4">
-                        <div class="flex items-center justify-between mb-3">
+                <div id="sectionCalendar" class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-20">
                             <button onclick="changeMonth(-1)" class="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition">
                                 <i class="ph ph-caret-left text-base"></i>
                             </button>
@@ -489,7 +489,7 @@
                     </div>
 
                     <!-- Popis nadolazećih termina / odabranog dana -->
-                    <div class="bg-slate-50/70 p-4 border-t border-slate-100">
+                    <div class="bg-slate-50/70 p-3.5 sm:p-4 border-t border-slate-100">
                         <div class="flex items-center justify-between mb-2.5">
                             <h3 id="selectedDateHeading" class="text-xs font-bold uppercase tracking-wider text-slate-500">Nadolazeći termini nastave</h3>
                             <button id="clearDateFilterBtn" onclick="clearSelectedDate()" class="hidden text-xs text-merlin-600 hover:underline font-medium">Prikaži sve</button>
@@ -502,18 +502,18 @@
                         <!-- Gumb za izvoz cijele satnice u Google Kalendar (.ics) -->
                         <div class="mt-4 pt-3 border-t border-slate-200/80 space-y-2">
                             <button onclick="exportAllToICS()" class="w-full py-2.5 px-3 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition flex items-center justify-center space-x-2 shadow-sm">
-                                <i class="ph ph-calendar-plus text-base text-merlin-600"></i>
-                                <span>Preuzmi cijelu satnicu za Google Kalendar (.ics)</span>
+                                <i class="ph ph-calendar-plus text-base text-merlin-600 shrink-0"></i>
+                                <span>Preuzmi satnicu za Google Kalendar (.ics)</span>
                             </button>
                             <p class="text-[11px] text-slate-400 text-center leading-tight">
-                                Savjet: Kliknite na <strong class="text-slate-600">"+ G-Kalendar"</strong> uz pojedini termin za izravni unos u vaš Google račun ili preuzmite <code>.ics</code> datoteku za uvoz svih termina odjednom.
+                                Savjet: Kliknite na <strong class="text-slate-600">"+ G-Kalendar"</strong> uz pojedini termin za izravni unos u vaš Google račun ili preuzmite <code>.ics</code> datoteku.
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- KARTICA BRZIH INFORMACIJA I KONZULTACIJA -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 space-y-3">
+                <div id="sectionInfo" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 space-y-3 scroll-mt-20">
                     <div class="flex items-center justify-between">
                         <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
                             <i class="ph ph-info text-merlin-600 text-lg"></i>
@@ -528,14 +528,14 @@
                     <!-- Nositelj kolegija -->
                     <div class="text-xs text-slate-600 space-y-1.5 bg-slate-50 p-3 rounded-xl border border-slate-100">
                         <div class="font-bold text-slate-800 flex items-center gap-1.5 pb-1 border-b border-slate-200/70">
-                            <i class="ph ph-user-circle text-merlin-600 text-sm"></i>
+                            <i class="ph ph-user-circle text-merlin-600 text-sm shrink-0"></i>
                             <span>Nositelj: <span id="sidebarLecturerName">prof. dr. sc. Sven Maričić</span></span>
                         </div>
-                        <div class="flex justify-between pt-0.5">
+                        <div class="flex flex-col sm:flex-row sm:justify-between pt-0.5 gap-0.5">
                             <span class="text-slate-500">Konzultacije:</span>
-                            <span class="font-medium text-slate-800" id="sidebarLecturerConsult">Petkom 15:00 - 16:00 (TFPU / Kabinet)</span>
+                            <span class="font-medium text-slate-800 sm:text-right" id="sidebarLecturerConsult">Petkom 15:00 - 16:00 (TFPU / Kabinet)</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center">
                             <span class="text-slate-500">E-pošta:</span>
                             <a id="sidebarLecturerEmail" href="mailto:smaricic@unipu.hr" class="font-medium text-merlin-600 hover:underline">smaricic@unipu.hr</a>
                         </div>
@@ -544,14 +544,14 @@
                     <!-- Asistent na kolegiju -->
                     <div class="text-xs text-slate-600 space-y-1.5 bg-sky-50/50 p-3 rounded-xl border border-sky-100">
                         <div class="font-bold text-slate-800 flex items-center gap-1.5 pb-1 border-b border-sky-200/60">
-                            <i class="ph ph-chalkboard-teacher text-emerald-600 text-sm"></i>
+                            <i class="ph ph-chalkboard-teacher text-emerald-600 text-sm shrink-0"></i>
                             <span>Asistent: <span id="sidebarAssistantName">Mateo Slivar, mag. ing. mech.</span></span>
                         </div>
-                        <div class="flex justify-between pt-0.5">
+                        <div class="flex flex-col sm:flex-row sm:justify-between pt-0.5 gap-0.5">
                             <span class="text-slate-500">Konzultacije:</span>
-                            <span class="font-medium text-slate-800" id="sidebarAssistantConsult">Petkom 19:00 - 20:00 (Dvorana 312)</span>
+                            <span class="font-medium text-slate-800 sm:text-right" id="sidebarAssistantConsult">Petkom 19:00 - 20:00 (Dvorana 312)</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center">
                             <span class="text-slate-500">E-pošta:</span>
                             <a id="sidebarAssistantEmail" href="mailto:mslivar@unipu.hr" class="font-medium text-merlin-600 hover:underline">mslivar@unipu.hr</a>
                         </div>
@@ -561,7 +561,7 @@
                     <div class="text-xs text-slate-600 space-y-2 bg-emerald-50/50 p-3 rounded-xl border border-emerald-100">
                         <div class="font-bold text-emerald-950 flex items-center justify-between gap-1.5 pb-1 border-b border-emerald-200/60">
                             <span class="flex items-center gap-1.5">
-                                <i class="ph ph-clock text-emerald-600 text-sm"></i>
+                                <i class="ph ph-clock text-emerald-600 text-sm shrink-0"></i>
                                 <span>Tjedni raspored (Zimski sem.)</span>
                             </span>
                             <span id="sidebarModeTag" class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">Onsite</span>
@@ -575,7 +575,7 @@
                             <span class="font-semibold text-slate-800">Petak 18:00 – 19:00 (Dv. 312)</span>
                         </div>
                         <div class="pt-1.5 border-t border-emerald-200/50">
-                            <a id="sidebarMeetLink" href="https://meet.google.com/aaj-kqej-vmq" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 bg-sky-600 hover:bg-sky-700 text-white rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 shadow-xs transition">
+                            <a id="sidebarMeetLink" href="https://meet.google.com/aaj-kqej-vmq" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3 bg-sky-600 hover:bg-sky-700 text-white rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 shadow-xs transition">
                                 <i class="ph ph-video-camera text-sm"></i>
                                 <span>Uključi se u Google Meet</span>
                                 <i class="ph ph-arrow-up-right text-xs"></i>
@@ -588,32 +588,56 @@
         </div>
     </main>
 
+    <!-- MOBILNA DONJA NAVIGACIJA (Brzi skok na Materijale, Obavijesti, Kalendar, Info i Meet) -->
+    <nav class="lg:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-lg z-40 px-2 py-1.5 flex items-center justify-around">
+        <button type="button" onclick="scrollToMobileSection('sectionMaterials', this)" class="mobile-nav-btn flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-merlin-600 font-semibold text-[11px] transition">
+            <i class="ph ph-books text-lg"></i>
+            <span>Materijali</span>
+        </button>
+        <button type="button" onclick="scrollToMobileSection('sectionAnnouncements', this)" class="mobile-nav-btn flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-500 hover:text-merlin-600 font-medium text-[11px] transition">
+            <i class="ph ph-megaphone text-lg"></i>
+            <span>Obavijesti</span>
+        </button>
+        <button type="button" onclick="scrollToMobileSection('sectionCalendar', this)" class="mobile-nav-btn flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-500 hover:text-merlin-600 font-medium text-[11px] transition">
+            <i class="ph ph-calendar-check text-lg"></i>
+            <span>Kalendar</span>
+        </button>
+        <button type="button" onclick="scrollToMobileSection('sectionInfo', this)" class="mobile-nav-btn flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-500 hover:text-merlin-600 font-medium text-[11px] transition">
+            <i class="ph ph-info text-lg"></i>
+            <span>Konzultacije</span>
+        </button>
+        <a id="mobileBottomMeetLink" href="https://meet.google.com/aaj-kqej-vmq" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl bg-sky-50 text-sky-700 font-semibold text-[11px] transition">
+            <i class="ph ph-video-camera text-lg"></i>
+            <span>Meet</span>
+        </a>
+    </nav>
+
     <!-- MODAL: Upravljanje popisom autoriziranih studenata (Excel DS033 i DAKD309 uvoz) -->
-    <div id="studentsModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in max-h-[90vh] flex flex-col">
-            <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-                <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
-                    <i class="ph ph-users-three text-merlin-600 text-xl"></i>
-                    <span>Autorizirani studenti kolegija (DS033 i DAKD309)</span>
+    <div id="studentsModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-2xl w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in max-h-[92vh] flex flex-col">
+            <div class="px-4 sm:px-5 py-3.5 sm:py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <h3 class="font-bold text-slate-800 text-sm sm:text-base flex items-center gap-2">
+                    <i class="ph ph-users-three text-merlin-600 text-xl shrink-0"></i>
+                    <span class="truncate">Autorizirani studenti (DS033 i DAKD309)</span>
                 </h3>
-                <button onclick="closeModal('studentsModal')" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+                <button onclick="closeModal('studentsModal')" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg">
                     <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
-            <div class="p-5 space-y-4 overflow-y-auto custom-scrollbar flex-1">
+            <div class="p-4 sm:p-5 space-y-4 overflow-y-auto custom-scrollbar flex-1">
                 <!-- Brzi uvoz iz Excel (.xlsx) datoteka -->
-                <div class="p-4 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-2.5">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div class="p-3.5 sm:p-4 bg-emerald-50/70 border border-emerald-200 rounded-2xl space-y-2.5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                         <div>
                             <h4 class="text-xs font-bold text-emerald-950 flex items-center gap-1.5">
-                                <i class="ph ph-microsoft-excel-logo text-base text-emerald-600"></i>
+                                <i class="ph ph-microsoft-excel-logo text-base text-emerald-600 shrink-0"></i>
                                 <span>Učitaj ISVU / Excel tablice studenata (.xlsx, .xls, .csv)</span>
                             </h4>
                             <p class="text-[11px] text-emerald-800 mt-0.5">
-                                Odaberite datoteke <strong>Prototipno 3D modeliranje (227157) (DS033).xlsx</strong> i <strong>(288842) (DAKD309).xlsx</strong>. Sustav automatski prepoznaje sve stupce sa službenim i privatnim e-mail adresama!
+                                Odaberite datoteke <strong>DS033.xlsx</strong> i <strong>DAKD309.xlsx</strong>. Sustav automatski prepoznaje službene i privatne e-mail adrese!
                             </p>
                         </div>
-                        <label class="cursor-pointer inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2 rounded-xl transition shadow-xs shrink-0">
+                        <label class="cursor-pointer inline-flex items-center justify-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2.5 sm:py-2 rounded-xl transition shadow-xs shrink-0">
                             <i class="ph ph-upload-simple text-sm"></i>
                             <span>Odaberi .xlsx datoteke</span>
                             <input type="file" id="excelFileInput" accept=".xlsx,.xls,.csv" multiple onchange="handleExcelStudentUpload(event)" class="hidden">
@@ -625,8 +649,8 @@
                 <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
                     <label class="block text-xs font-bold text-slate-700">Dodaj studente (službeni i privatni mailovi — možete zalijepiti izravno iz Excela)</label>
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <textarea id="bulkStudentInput" rows="2" placeholder="Zalijepite redove iz Excela ili upišite npr.: Ime Prezime, iprezime@unipu.hr, ime.privatni@gmail.com" class="flex-1 px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500"></textarea>
-                        <button type="button" onclick="addBulkStudentsFromText()" class="px-4 py-2 bg-merlin-600 hover:bg-merlin-700 text-white rounded-xl text-xs font-semibold transition shrink-0">
+                        <textarea id="bulkStudentInput" rows="2" placeholder="Upišite npr.: Ime Prezime, iprezime@unipu.hr, ime@gmail.com" class="flex-1 px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500"></textarea>
+                        <button type="button" onclick="addBulkStudentsFromText()" class="px-4 py-2.5 sm:py-2 bg-merlin-600 hover:bg-merlin-700 text-white rounded-xl text-xs font-semibold transition shrink-0">
                             + Dodaj na popis
                         </button>
                     </div>
@@ -634,25 +658,25 @@
 
                 <!-- Popis trenutno autoriziranih studenata -->
                 <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Popis registriranih studenata i e-mail adresa (<span id="modalStudentCount">0</span>)</span>
-                        <input type="text" id="studentFilterInput" oninput="renderStudentsListInModal()" placeholder="Filtriraj po imenu ili e-mailu..." class="px-2.5 py-1 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-merlin-500">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                        <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Registrirani studenti (<span id="modalStudentCount">0</span>)</span>
+                        <input type="text" id="studentFilterInput" oninput="renderStudentsListInModal()" placeholder="Filtriraj po imenu ili e-mailu..." class="w-full sm:w-56 px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-merlin-500">
                     </div>
-                    <div id="studentsModalList" class="divide-y divide-slate-100 border border-slate-200 rounded-xl max-h-64 overflow-y-auto custom-scrollbar bg-white">
+                    <div id="studentsModalList" class="divide-y divide-slate-100 border border-slate-200 rounded-xl max-h-60 overflow-y-auto custom-scrollbar bg-white">
                         <!-- Dinamički se puni -->
                     </div>
                 </div>
             </div>
-            <div class="px-5 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-                <span class="text-[11px] text-slate-500">Nakon uvoza kliknite <strong>"1. Preuzmi ažurirani index.html"</strong> kako bi popis bio spremljen na GitHubu.</span>
+            <div class="px-4 sm:px-5 py-3 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+                <span class="text-[11px] text-slate-500">Nakon uvoza kliknite <strong>"1. Preuzmi ažurirani index.html"</strong> za spremanje na GitHub.</span>
                 <button type="button" onclick="closeModal('studentsModal')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-white hover:bg-slate-700">Zatvori</button>
             </div>
         </div>
     </div>
 
     <!-- MODAL: Nova Obavijest -->
-    <div id="announcementModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in">
+    <div id="announcementModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in max-h-[92vh] overflow-y-auto">
             <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
                 <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
                     <i class="ph ph-megaphone text-amber-500"></i>
@@ -662,12 +686,12 @@
                     <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
-            <form onsubmit="saveAnnouncement(event)" class="p-5 space-y-4">
+            <form onsubmit="saveAnnouncement(event)" class="p-4 sm:p-5 space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Naslov obavijesti *</label>
                     <input type="text" id="annTitle" required placeholder="npr. Promjena termina 1. kolokvija" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">Kategorija / Oznaka</label>
                         <select id="annImportant" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
@@ -685,16 +709,16 @@
                     <textarea id="annContent" rows="4" required placeholder="Upišite sadržaj obavijesti za studente..." class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500"></textarea>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('announcementModal')" class="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100">Odustani</button>
-                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-merlin-600 hover:bg-merlin-700 text-white shadow-sm">Objavi obavijest</button>
+                    <button type="button" onclick="closeModal('announcementModal')" class="px-4 py-2.5 sm:py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100">Odustani</button>
+                    <button type="submit" class="px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold bg-merlin-600 hover:bg-merlin-700 text-white shadow-sm">Objavi obavijest</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- MODAL: Novi materijal (Google Drive poveznica) -->
-    <div id="materialModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in">
+    <div id="materialModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in max-h-[92vh] overflow-y-auto">
             <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
                 <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
                     <i class="ph ph-google-drive-logo text-emerald-600"></i>
@@ -704,13 +728,13 @@
                     <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
-            <form onsubmit="saveMaterial(event)" class="p-5 space-y-4">
+            <form onsubmit="saveMaterial(event)" class="p-4 sm:p-5 space-y-4">
                 <input type="hidden" id="matWeekId">
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Naziv materijala / datoteke *</label>
                     <input type="text" id="matTitle" required placeholder="npr. Predavanje 4 - Priprema 3D modela (PDF)" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">Vrsta materijala</label>
                         <select id="matType" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
@@ -728,26 +752,26 @@
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Google Drive poveznica (Share Link) *</label>
                     <input type="url" id="matUrl" required placeholder="https://drive.google.com/..." class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
-                    <p class="text-[11px] text-slate-400 mt-1">U Google Driveu kliknite desnim klikom na datoteku ili mapu &rarr; Podijeli (Share) &rarr; Kopiraj poveznicu.</p>
+                    <p class="text-[11px] text-slate-400 mt-1">U Google Driveu kliknite na datoteku ili mapu &rarr; Podijeli (Share) &rarr; Kopiraj poveznicu.</p>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('materialModal')" class="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100">Odustani</button>
-                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-merlin-600 hover:bg-merlin-700 text-white shadow-sm">Spremi materijal</button>
+                    <button type="button" onclick="closeModal('materialModal')" class="px-4 py-2.5 sm:py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100">Odustani</button>
+                    <button type="submit" class="px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold bg-merlin-600 hover:bg-merlin-700 text-white shadow-sm">Spremi materijal</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- MODAL: Nova Tjedna Sekcija -->
-    <div id="weekModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in">
+    <div id="weekModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in">
             <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
                 <h3 class="font-bold text-slate-800 text-base">Dodaj novo poglavlje / nastavnu cjelinu</h3>
                 <button onclick="closeModal('weekModal')" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
                     <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
-            <form onsubmit="saveWeek(event)" class="p-5 space-y-4">
+            <form onsubmit="saveWeek(event)" class="p-4 sm:p-5 space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Naziv poglavlja ili teme *</label>
                     <input type="text" id="weekTitle" required placeholder="npr. Poglavlje 5: Dodatni materijali" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
@@ -757,16 +781,16 @@
                     <input type="text" id="weekSummary" placeholder="npr. Opis cjelina i prezentacija" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('weekModal')" class="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100">Odustani</button>
-                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-merlin-600 hover:bg-merlin-700 text-white shadow-sm">Dodaj cjelinu</button>
+                    <button type="button" onclick="closeModal('weekModal')" class="px-4 py-2.5 sm:py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100">Odustani</button>
+                    <button type="submit" class="px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold bg-merlin-600 hover:bg-merlin-700 text-white shadow-sm">Dodaj cjelinu</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- MODAL: Novi Termin u Kalendaru -->
-    <div id="eventModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in">
+    <div id="eventModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in max-h-[92vh] overflow-y-auto">
             <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
                 <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
                     <i class="ph ph-calendar-plus text-merlin-600"></i>
@@ -776,12 +800,12 @@
                     <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
-            <form onsubmit="saveCalendarEvent(event)" class="p-5 space-y-4">
+            <form onsubmit="saveCalendarEvent(event)" class="p-4 sm:p-5 space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Naziv termina *</label>
                     <input type="text" id="evTitle" required placeholder="npr. Predavanje: Aditivna proizvodnja" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">Datum održavanja *</label>
                         <input type="date" id="evDate" required class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
@@ -805,7 +829,7 @@
                         <input type="time" id="evEnd" value="18:00" required class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">Način održavanja *</label>
                         <select id="evMode" onchange="handleEventModeSelect()" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
@@ -824,47 +848,23 @@
                     <input type="text" id="evDesc" placeholder="npr. Ponijeti vlastito prijenosno računalo" class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('eventModal')" class="px-4 py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100">Odustani</button>
-                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-merlin-600 hover:bg-merlin-700 text-white shadow-sm">Dodaj u kalendar</button>
+                    <button type="button" onclick="closeModal('eventModal')" class="px-4 py-2.5 sm:py-2 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-100">Odustani</button>
+                    <button type="submit" class="px-4 py-2.5 sm:py-2 rounded-xl text-xs font-semibold bg-merlin-600 hover:bg-merlin-700 text-white shadow-sm">Dodaj u kalendar</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- MODAL: Uređivanje podataka o kolegiju -->
-    <div id="courseInfoModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in max-h-[90vh] flex flex-col">
+    <div id="courseInfoModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-lg w-full shadow-xl border border-slate-200 overflow-hidden animate-fade-in max-h-[92vh] flex flex-col">
             <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
                 <h3 class="font-bold text-slate-800 text-base">Postavke kolegija, nositelja i asistenta</h3>
                 <button onclick="closeModal('courseInfoModal')" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
                     <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
-            <form onsubmit="saveCourseInfo(event)" class="p-5 space-y-3.5 overflow-y-auto custom-scrollbar">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div class="sm:col-span-2">
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Naziv kolegija *</label>
-                        <input type="text" id="editCourseTitle" required class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kratica kolegija</label>
-                        <input type="text" id="editCourseCode" required class="w-full px-3.5 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
-                    </div>
-                </div>
-
-                <!-- Podaci o nositelju -->
-                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2.5">
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">Nositelj kolegija</span>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Ime i titula nositelja *</label>
-                        <input type="text" id="editCourseLecturer" required class="w-full px-3 py-1.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-700 mb-1">Termin konzultacija i kabinet</label>
-                            <input type="text" id="editLecturerConsult" class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
-                        </div>
-                        <div>
+            <form onsubmit="saveCourseInfo(event)" class="p-4 sm:p-5 space-y-3.5 overflow-y-auto custom-scrollbar">
                             <label class="block text-xs font-semibold text-slate-700 mb-1">E-pošta nositelja</label>
                             <input type="email" id="editLecturerEmail" class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-merlin-500">
                         </div>
@@ -1533,14 +1533,14 @@
             document.getElementById('sidebarAssistantConsult').textContent = info.assistantConsult || 'Petkom 19:00 - 20:00 (Dvorana 312)';
             const assEmailEl = document.getElementById('sidebarAssistantEmail');
             assEmailEl.textContent = info.assistantEmail || 'mslivar@unipu.hr';
-            assEmailEl.href = 'mailto:' + (info.assistantEmail || 'mslivar@unipu.hr');
-
-            // Online Meet gumbi i status izvođenja
+            <!--Online Meet gumbi i status izvođenja -->
             const meetUrl = info.onlineUrl || 'https://meet.google.com/aaj-kqej-vmq';
             const headerMeetBtn = document.getElementById('headerMeetBtn');
             const sidebarMeetLink = document.getElementById('sidebarMeetLink');
+            const mobileBottomMeetLink = document.getElementById('mobileBottomMeetLink');
             if (headerMeetBtn) headerMeetBtn.href = meetUrl;
             if (sidebarMeetLink) sidebarMeetLink.href = meetUrl;
+            if (mobileBottomMeetLink) mobileBottomMeetLink.href = meetUrl;
 
             const mode = info.deliveryMode || 'onsite';
             const badge = document.getElementById('courseDeliveryBadge');
@@ -1589,9 +1589,22 @@
             });
             const activeBtn = document.getElementById('filter-' + type);
             if (activeBtn) {
-                activeBtn.className = 'filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-merlin-600 text-white transition';
+                activeBtn.className = 'filter-btn shrink-0 px-3.5 py-2 sm:py-1.5 rounded-xl text-xs font-medium bg-merlin-600 text-white transition';
             }
             renderAll();
+        }
+
+        function scrollToMobileSection(sectionId, btnEl) {
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            document.querySelectorAll('.mobile-nav-btn').forEach(b => {
+                b.className = 'mobile-nav-btn flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-500 hover:text-merlin-600 font-medium text-[11px] transition';
+            });
+            if (btnEl) {
+                btnEl.className = 'mobile-nav-btn flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-merlin-600 font-semibold text-[11px] transition';
+            }
         }
 
         function renderAnnouncements() {
@@ -1607,35 +1620,49 @@
             }
 
             container.innerHTML = list.map((ann, idx) => `
-                <article class="p-4 sm:p-5 hover:bg-slate-50/80 transition ${ann.important ? 'bg-rose-50/30' : ''}"
+                <article class="p-3.5 sm:p-5 hover:bg-slate-50/80 transition ${ann.important ? 'bg-rose-50/30' : ''}"
                     ${currentRole === 'teacher' ? `draggable="true" ondragstart="onAnnDragStart(event, ${idx})" ondragover="onDragOverItem(event)" ondragleave="onDragLeaveItem(event)" ondrop="onAnnDrop(event, ${idx})"` : ''}>
-                    <div class="flex items-start justify-between gap-3">
-                        <div class="space-y-1.5 flex-1">
-                            <div class="flex items-center flex-wrap gap-2">
-                                ${currentRole === 'teacher' ? `<span class="drag-handle text-slate-400 hover:text-slate-600" title="Povuci obavijest"><i class="ph ph-dots-six-vertical text-base"></i></span>` : ''}
+                    <div class="flex items-start justify-between gap-2.5 sm:gap-3">
+                        <div class="space-y-1.5 flex-1 min-w-0">
+                            <div class="flex items-center flex-wrap gap-1.5 sm:gap-2">
+                                ${currentRole === 'teacher' ? `<span class="drag-handle text-slate-400 hover:text-slate-600 hidden sm:inline" title="Povuci obavijest"><i class="ph ph-dots-six-vertical text-base"></i></span>` : ''}
                                 ${ann.important ? `<span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-rose-100 text-rose-700 rounded-md">Važno</span>` : `<span class="px-2 py-0.5 text-[10px] font-semibold bg-slate-100 text-slate-600 rounded-md">Obavijest</span>`}
                                 <span class="text-[11px] text-slate-400 flex items-center gap-1"><i class="ph ph-clock"></i> ${ann.date}</span>
                             </div>
-                            <h3 class="font-bold text-slate-800 text-sm sm:text-base">${ann.title}</h3>
-                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">${ann.content}</p>
+                            <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug break-words">${ann.title}</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed break-words">${ann.content}</p>
                             ${ann.link ? `
                                 <div class="pt-1">
                                     <a href="${ann.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 text-xs font-semibold text-merlin-600 hover:text-merlin-800 hover:underline">
-                                        <i class="ph ph-google-drive-logo text-sm"></i>
-                                        <span>Otvori priloženu Google Drive mapu / dokument</span>
-                                        <i class="ph ph-arrow-up-right text-xs"></i>
+                                        <i class="ph ph-google-drive-logo text-sm shrink-0"></i>
+                                        <span>Otvori priloženu Google Drive mapu</span>
+                                        <i class="ph ph-arrow-up-right text-xs shrink-0"></i>
                                     </a>
                                 </div>
                             ` : ''}
                         </div>
                         ${currentRole === 'teacher' ? `
-                            <button onclick="deleteAnnouncement('${ann.id}')" class="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition" title="Obriši obavijest">
-                                <i class="ph ph-trash text-base"></i>
-                            </button>
+                            <div class="flex items-center gap-1 shrink-0">
+                                <button onclick="moveAnnouncement(${idx}, -1)" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg" title="Pomakni gore"><i class="ph ph-arrow-up text-xs"></i></button>
+                                <button onclick="moveAnnouncement(${idx}, 1)" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg" title="Pomakni dolje"><i class="ph ph-arrow-down text-xs"></i></button>
+                                <button onclick="deleteAnnouncement('${ann.id}')" class="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition" title="Obriši obavijest">
+                                    <i class="ph ph-trash text-base"></i>
+                                </button>
+                            </div>
                         ` : ''}
                     </div>
                 </article>
             `).join('');
+        }
+
+        function moveAnnouncement(idx, dir) {
+            const newIdx = idx + dir;
+            if (newIdx < 0 || newIdx >= courseData.announcements.length) return;
+            const temp = courseData.announcements[idx];
+            courseData.announcements[idx] = courseData.announcements[newIdx];
+            courseData.announcements[newIdx] = temp;
+            saveCourseData();
+            renderAnnouncements();
         }
 
         function getMaterialStyle(type) {
@@ -1672,29 +1699,33 @@
                 return `
                     <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden transition"
                         ${currentRole === 'teacher' ? `draggable="true" ondragstart="onWeekDragStart(event, ${wIdx})" ondragover="onDragOverItem(event)" ondragleave="onDragLeaveItem(event)" ondrop="onWeekDrop(event, ${wIdx})"` : ''}>
-                        <div class="px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                            <div class="flex items-start space-x-2.5">
+                        <div class="px-4 sm:px-5 py-3.5 sm:py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                            <div class="flex items-start space-x-2">
                                 ${currentRole === 'teacher' ? `
-                                    <span class="drag-handle text-slate-400 hover:text-slate-700 mt-0.5 p-1" title="Povuci poglavlje za promjenu redoslijeda">
+                                    <span class="drag-handle text-slate-400 hover:text-slate-700 mt-0.5 p-1 hidden sm:inline" title="Povuci poglavlje za promjenu redoslijeda">
                                         <i class="ph ph-dots-six-vertical text-lg"></i>
                                     </span>
                                 ` : ''}
                                 <div>
-                                    <h3 class="font-bold text-slate-800 text-sm sm:text-base">${week.title}</h3>
-                                    ${week.summary ? `<p class="text-xs text-slate-500 mt-0.5">${week.summary}</p>` : ''}
+                                    <h3 class="font-bold text-slate-800 text-sm sm:text-base leading-snug">${week.title}</h3>
+                                    ${week.summary ? `<p class="text-[11px] sm:text-xs text-slate-500 mt-0.5 leading-relaxed">${week.summary}</p>` : ''}
                                 </div>
                             </div>
                             ${currentRole === 'teacher' ? `
-                                <div class="flex items-center space-x-1.5 shrink-0">
-                                    <button onclick="moveWeek(${wIdx}, -1)" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg" title="Pomakni gore"><i class="ph ph-arrow-up text-xs"></i></button>
-                                    <button onclick="moveWeek(${wIdx}, 1)" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg" title="Pomakni dolje"><i class="ph ph-arrow-down text-xs"></i></button>
-                                    <button onclick="openMaterialModal('${week.id}')" class="inline-flex items-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-semibold px-2.5 py-1.5 rounded-xl transition">
-                                        <i class="ph ph-plus"></i>
-                                        <span>Dodaj G-Drive link</span>
-                                    </button>
-                                    <button onclick="deleteWeek('${week.id}')" class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition" title="Obriši cjelinu">
-                                        <i class="ph ph-trash text-sm"></i>
-                                    </button>
+                                <div class="flex items-center justify-between sm:justify-end space-x-1.5 pt-1 sm:pt-0 border-t sm:border-t-0 border-slate-100 shrink-0">
+                                    <div class="flex items-center space-x-1">
+                                        <button onclick="moveWeek(${wIdx}, -1)" class="p-2 sm:p-1.5 text-slate-500 hover:text-slate-800 bg-slate-100 sm:bg-transparent hover:bg-slate-200 rounded-lg" title="Pomakni poglavlje gore"><i class="ph ph-arrow-up text-xs"></i></button>
+                                        <button onclick="moveWeek(${wIdx}, 1)" class="p-2 sm:p-1.5 text-slate-500 hover:text-slate-800 bg-slate-100 sm:bg-transparent hover:bg-slate-200 rounded-lg" title="Pomakni poglavlje dolje"><i class="ph ph-arrow-down text-xs"></i></button>
+                                    </div>
+                                    <div class="flex items-center space-x-1.5">
+                                        <button onclick="openMaterialModal('${week.id}')" class="inline-flex items-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-semibold px-3 py-1.5 rounded-xl transition">
+                                            <i class="ph ph-plus"></i>
+                                            <span>Dodaj link</span>
+                                        </button>
+                                        <button onclick="deleteWeek('${week.id}')" class="p-2 sm:p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition" title="Obriši cjelinu">
+                                            <i class="ph ph-trash text-sm"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             ` : ''}
                         </div>
@@ -1705,28 +1736,30 @@
                             ` : filteredMaterials.map((mat, mIdx) => {
                                 const st = getMaterialStyle(mat.type);
                                 return `
-                                    <div class="p-3.5 sm:px-5 flex items-center justify-between gap-3 hover:bg-slate-50/90 transition group"
+                                    <div class="p-3 sm:px-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 hover:bg-slate-50/90 transition group"
                                         ${currentRole === 'teacher' ? `draggable="true" ondragstart="onMatDragStart(event, '${week.id}', ${mIdx})" ondragover="onDragOverItem(event)" ondragleave="onDragLeaveItem(event)" ondrop="onMatDrop(event, '${week.id}', ${mIdx})"` : ''}>
-                                        <a href="${mat.url}" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-3 flex-1 min-w-0">
-                                            <div class="w-9 h-9 rounded-xl border ${st.bg} flex items-center justify-center shrink-0">
+                                        <a href="${mat.url}" target="_blank" rel="noopener noreferrer" class="flex items-start sm:items-center space-x-3 flex-1 min-w-0">
+                                            <div class="w-9 h-9 rounded-xl border ${st.bg} flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                                                 <i class="ph ${st.icon} text-lg"></i>
                                             </div>
                                             <div class="min-w-0 flex-1">
                                                 <div class="flex items-center flex-wrap gap-1.5">
-                                                    <span class="font-semibold text-xs sm:text-sm text-slate-800 group-hover:text-merlin-600 transition truncate">${mat.title}</span>
+                                                    <span class="font-semibold text-xs sm:text-sm text-slate-800 group-hover:text-merlin-600 transition leading-snug break-words">${mat.title}</span>
                                                 </div>
-                                                <div class="flex items-center gap-2 mt-0.5">
+                                                <div class="flex items-center flex-wrap gap-2 mt-1">
                                                     <span class="text-[10px] font-semibold px-2 py-0.2 rounded border ${st.bg}">${st.badge}</span>
                                                     ${mat.note ? `<span class="text-[11px] text-slate-400">${mat.note}</span>` : ''}
                                                 </div>
                                             </div>
                                         </a>
-                                        <div class="flex items-center space-x-1.5 shrink-0">
-                                            <a href="${mat.url}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 rounded-xl bg-slate-100 group-hover:bg-merlin-600 text-slate-600 group-hover:text-white text-xs font-medium transition inline-flex items-center gap-1">
-                                                <span class="hidden sm:inline">Otvori</span>
+                                        <div class="flex items-center justify-end space-x-1.5 shrink-0 pl-12 sm:pl-0">
+                                            <a href="${mat.url}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-slate-100 group-hover:bg-merlin-600 text-slate-700 group-hover:text-white text-xs font-medium transition inline-flex items-center gap-1">
+                                                <span>Otvori</span>
                                                 <i class="ph ph-arrow-square-out text-xs"></i>
                                             </a>
                                             ${currentRole === 'teacher' ? `
+                                                <button onclick="moveMaterial('${week.id}', ${mIdx}, -1)" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg" title="Pomakni gore"><i class="ph ph-arrow-up text-xs"></i></button>
+                                                <button onclick="moveMaterial('${week.id}', ${mIdx}, 1)" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg" title="Pomakni dolje"><i class="ph ph-arrow-down text-xs"></i></button>
                                                 <button onclick="deleteMaterial('${week.id}', '${mat.id}')" class="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition" title="Ukloni materijal">
                                                     <i class="ph ph-trash text-sm"></i>
                                                 </button>
@@ -1741,6 +1774,18 @@
             }).join('');
 
             container.innerHTML = html || `<div class="bg-white p-8 rounded-2xl border border-slate-200 text-center text-xs text-slate-400">Nema pronađenih nastavnih materijala.</div>`;
+        }
+
+        function moveMaterial(weekId, matIdx, dir) {
+            const week = courseData.weeks.find(w => w.id === weekId);
+            if (!week || !Array.isArray(week.materials)) return;
+            const newIdx = matIdx + dir;
+            if (newIdx < 0 || newIdx >= week.materials.length) return;
+            const temp = week.materials[matIdx];
+            week.materials[matIdx] = week.materials[newIdx];
+            week.materials[newIdx] = temp;
+            saveCourseData();
+            renderWeeks();
         }
 
         let dragState = { kind: null, weekIdx: null, weekId: null, matIdx: null, annIdx: null };
