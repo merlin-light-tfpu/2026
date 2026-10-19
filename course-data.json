@@ -1,0 +1,326 @@
+{
+  "info": {
+    "title": "Prototipno 3D modeliranje",
+    "code": "DS033 / DAKD309",
+    "lecturer": "prof. dr. sc. Sven Maričić",
+    "lecturerConsult": "Petkom",
+    "lecturerEmail": "smaricic@unipu.hr",
+    "assistant": "Mateo Slivar, mag. ing. mech.",
+    "assistantConsult": "Petkom",
+    "assistantEmail": "mslivar@unipu.hr",
+    "room": "Predavanja: 314 / Vježbe: 312",
+    "deliveryMode": "onsite",
+    "onlineUrl": "https://meet.google.com/aaj-kqej-vmq",
+    "mainDriveUrl": "https://drive.google.com/drive/folders/1AtML6dkYvZgIjBv-n3xiDc3BlUyR8VOD?usp=drive_link",
+    "predavanjaDriveUrl": "https://drive.google.com/drive/folders/1CIQYFsvTBNz6RDa11JrTGh1cTBevIxpH",
+    "vjezbeDriveUrl": "https://drive.google.com/drive/folders/1lS2PVilYJhV38PXfhnOCdtLnhkSmM8O2",
+    "podcastDriveUrl": "https://drive.google.com/drive/folders/1OFOMhtSco_GfUHS4OuWrDhO-ZI-fn-SH"
+  },
+  "allowedStudents": [
+    {
+      "id": "st-admin-1",
+      "name": "prof. dr. sc. Sven Maričić (Nositelj)",
+      "group": "TFPU Nastavnik",
+      "officialEmail": "smaricic@unipu.hr",
+      "privateEmail": "sven.maricic@gmail.com"
+    },
+    {
+      "id": "st-admin-2",
+      "name": "Mateo Slivar, mag. ing. mech. (Asistent)",
+      "group": "TFPU Asistent",
+      "officialEmail": "mslivar@unipu.hr",
+      "privateEmail": "mateo.slivar@gmail.com"
+    }
+  ],
+  "announcements": [
+    {
+      "id": "ann-1",
+      "title": "Dobrodošli na kolegij Prototipno 3D modeliranje (DS033 / DAKD309) — Raspored i pravila",
+      "date": "19. 10. 2026. u 09:00",
+      "important": true,
+      "content": "Poštovane kolegice i kolege, nastava iz kolegija Prototipno 3D modeliranje na Sveučilišnom diplomskom studiju strojarstva (2. godina, III. semestar) održava se petkom: Predavanja od 16:00 do 18:00 sati u dvorani 314, a Vježbe od 18:00 do 19:00 sati u dvorani 312. Svi nastavni materijali u oblaku podijeljeni su u 3 podmape: Predavanja, Vježbe i Podcast.",
+      "link": "https://drive.google.com/drive/folders/1AtML6dkYvZgIjBv-n3xiDc3BlUyR8VOD?usp=drive_link"
+    },
+    {
+      "id": "ann-2",
+      "title": "Pristup materijalima u oblaku (Predavanja, Vježbe i Podcast)",
+      "date": "19. 10. 2026. u 11:30",
+      "important": false,
+      "content": "U središnjem repozitoriju kolegija dostupne su izravne poveznice na tri podmape na Google Disku: Predavanja (prezentacije T1–T15), Vježbe (CAD modeliranje, Slicing i 3D skeniranje) te Podcast epizode za praćenje i pripremu nastave.",
+      "link": "https://drive.google.com/drive/folders/1AtML6dkYvZgIjBv-n3xiDc3BlUyR8VOD?usp=drive_link"
+    }
+  ],
+  "weeks": [
+    {
+      "id": "week-1",
+      "title": "Poglavlje 1: Osnove 3D tiska, materijala, modeliranja i 3D skeniranja (Teme 1–4)",
+      "summary": "Temelji aditivne proizvodnje prema ISO/ASTM 52900, polimerni i kompozitni materijali, B-Rep/NURBS/SDF modeliranje i ručni laserski 3D skener.",
+      "materials": [
+        {
+          "id": "mat-100",
+          "title": "[Mapa Predavanja] Kompletna prezentacija: (Maričić, 2026) Prototipno 3D modeliranje",
+          "type": "predavanje",
+          "url": "https://drive.google.com/drive/folders/1CIQYFsvTBNz6RDa11JrTGh1cTBevIxpH",
+          "note": "Podmapa: Predavanja"
+        },
+        {
+          "id": "mat-101",
+          "title": "[Mapa Predavanja] Tema 1 i Tema 2: Klasifikacija metoda 3D tiska (FDM, SLA, SLS, SLM) i materijali",
+          "type": "predavanje",
+          "url": "https://drive.google.com/drive/folders/1CIQYFsvTBNz6RDa11JrTGh1cTBevIxpH",
+          "note": "Ishodi I1 i I2"
+        },
+        {
+          "id": "mat-102",
+          "title": "[Mapa Vježbe] Tema 3 i Tema 4: Od 2D skice do parametarskog 3D modela i rad s ručnim laserskim 3D skenerom",
+          "type": "vjezbe",
+          "url": "https://drive.google.com/drive/folders/1lS2PVilYJhV38PXfhnOCdtLnhkSmM8O2",
+          "note": "Podmapa: Vježbe"
+        },
+        {
+          "id": "mat-103",
+          "title": "[Mapa Podcast] Audio/Video uvod u aditivnu proizvodnju, 3D skeniranje i odabir materijala",
+          "type": "video",
+          "url": "https://drive.google.com/drive/folders/1OFOMhtSco_GfUHS4OuWrDhO-ZI-fn-SH",
+          "note": "Podmapa: Podcast"
+        }
+      ]
+    },
+    {
+      "id": "week-2",
+      "title": "Poglavlje 2: Priprema 3D modela (Slicing), kalibracija 3D pisača i personalizacija (Teme 5–8)",
+      "summary": "Topologija mreže (STL vs. 3MF), anizotropija čvrstoće, efekt stepenica, vrste ispune (Gyroid), G-kod i Z-offset kalibracija.",
+      "materials": [
+        {
+          "id": "mat-201",
+          "title": "[Mapa Predavanja] Tema 5: Priprema 3D modela 1 — Provjera mreže (Manifold), orijentacija i kut prepusta (45°)",
+          "type": "predavanje",
+          "url": "https://drive.google.com/drive/folders/1CIQYFsvTBNz6RDa11JrTGh1cTBevIxpH",
+          "note": "Podmapa: Predavanja"
+        },
+        {
+          "id": "mat-202",
+          "title": "[Mapa Vježbe] Tema 6, 7 i 8: Slicing parametri (Gyroid, Tree potpore), kalibracija 3D pisača i personalizirane ortoze",
+          "type": "vjezbe",
+          "url": "https://drive.google.com/drive/folders/1lS2PVilYJhV38PXfhnOCdtLnhkSmM8O2",
+          "note": "Podmapa: Vježbe"
+        },
+        {
+          "id": "mat-203",
+          "title": "[Mapa Podcast] Epizoda: Kako pravilno kalibrirati 3D pisač i izbjeći pogreške kod Slicinga",
+          "type": "video",
+          "url": "https://drive.google.com/drive/folders/1OFOMhtSco_GfUHS4OuWrDhO-ZI-fn-SH",
+          "note": "Podmapa: Podcast"
+        }
+      ]
+    },
+    {
+      "id": "week-3",
+      "title": "Poglavlje 3: Razvoj proizvoda, napredne metode i inženjerski MKE proračuni (Teme 9–13)",
+      "summary": "TRL razine prototipa, ekonomika serije (Break-even point), mikro-CT skeniranje, topološka optimizacija (SIMP) i kinematske zračnosti.",
+      "materials": [
+        {
+          "id": "mat-301",
+          "title": "[Mapa Predavanja] Tema 9–12: Analiza tržišta, TRL razine, DfAM, mikro-CT skeniranje i Topološka optimizacija",
+          "type": "predavanje",
+          "url": "https://drive.google.com/drive/folders/1CIQYFsvTBNz6RDa11JrTGh1cTBevIxpH",
+          "note": "Podmapa: Predavanja"
+        },
+        {
+          "id": "mat-302",
+          "title": "[Mapa Vježbe] Tema 13: MKE (FEM) proračun ortotropnih 3D tiskanih modela i zračnosti za Print-in-Place sklopove",
+          "type": "vjezbe",
+          "url": "https://drive.google.com/drive/folders/1lS2PVilYJhV38PXfhnOCdtLnhkSmM8O2",
+          "note": "Podmapa: Vježbe"
+        },
+        {
+          "id": "mat-303",
+          "title": "[Mapa Podcast] Epizoda: Od prototipa do tržišta, topološka optimizacija i inženjerske tolerancije",
+          "type": "video",
+          "url": "https://drive.google.com/drive/folders/1OFOMhtSco_GfUHS4OuWrDhO-ZI-fn-SH",
+          "note": "Podmapa: Podcast"
+        }
+      ]
+    },
+    {
+      "id": "week-4",
+      "title": "Poglavlje 4: Budućnost aditivnih tehnologija, Code-CAD i Otvoreni kod (Teme 14–15)",
+      "summary": "Industrija 5.0, 5-osni neplanarni tisak, 4D tisak pametnih polimera, AI nadzor, SDF polja udaljenosti, RepRap, CoreXY i Klipper.",
+      "materials": [
+        {
+          "id": "mat-401",
+          "title": "[Mapa Predavanja] Tema 14 i 15: Višeosni 3D tisak, 4D tisak, AI nadzor, RepRap, CoreXY i Klipper arhitektura",
+          "type": "predavanje",
+          "url": "https://drive.google.com/drive/folders/1CIQYFsvTBNz6RDa11JrTGh1cTBevIxpH",
+          "note": "Podmapa: Predavanja"
+        },
+        {
+          "id": "mat-402",
+          "title": "[Mapa Vježbe] Tema 14 (CAD): Implicitno modeliranje (SDF) i programsko 3D modeliranje (Code-CAD u OpenSCAD-u)",
+          "type": "vjezbe",
+          "url": "https://drive.google.com/drive/folders/1lS2PVilYJhV38PXfhnOCdtLnhkSmM8O2",
+          "note": "Podmapa: Vježbe"
+        },
+        {
+          "id": "mat-403",
+          "title": "[Mapa Podcast] Epizoda: Budućnost 3D tiska u Industriji 5.0 i revolucija otvorenog koda (Open Source)",
+          "type": "video",
+          "url": "https://drive.google.com/drive/folders/1OFOMhtSco_GfUHS4OuWrDhO-ZI-fn-SH",
+          "note": "Podmapa: Podcast"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-101",
+      "title": "Predavanje (T1–T2): Uvod u 3D tisak (ISO/ASTM 52900) i materijali za 3D tisak",
+      "date": "2026-10-23",
+      "start": "16:00",
+      "end": "18:00",
+      "type": "predavanje",
+      "location": "TFPU - Dvorana 314",
+      "desc": "Sveučilišni diplomski studij strojarstva (2. god., III. semestar). Nositelj: prof. dr. sc. Sven Maričić."
+    },
+    {
+      "id": "ev-102",
+      "title": "Vježbe 1: Parametarsko 3D CAD modeliranje i priprema okruženja",
+      "date": "2026-10-23",
+      "start": "18:00",
+      "end": "19:00",
+      "type": "vjezbe",
+      "location": "TFPU - Dvorana 312",
+      "desc": "Praktične vježbe. Asistent: Mateo Slivar, mag. ing. mech."
+    },
+    {
+      "id": "ev-103",
+      "title": "Predavanje (T3–T4): Od skice do 3D modela i osnove 3D skeniranja ručnim laserskim skenerom",
+      "date": "2026-10-30",
+      "start": "16:00",
+      "end": "18:00",
+      "type": "predavanje",
+      "location": "TFPU - Dvorana 314",
+      "desc": "Laserska triangulacija, referentni markeri i obrada oblaka točaka (ICP)."
+    },
+    {
+      "id": "ev-104",
+      "title": "Vježbe 2: Rad s ručnim laserskim 3D skenerom i akvizicija oblaka točaka",
+      "date": "2026-10-30",
+      "start": "18:00",
+      "end": "19:00",
+      "type": "vjezbe",
+      "location": "TFPU - Dvorana 312",
+      "desc": "Skeniranje testnog strojnog dijela i krpanje STL mreže."
+    },
+    {
+      "id": "ev-105",
+      "title": "Predavanje (T5–T6): Priprema 3D modela za 3D tisak 1 i 2 (Slicing, ispuna, G-kod)",
+      "date": "2026-11-06",
+      "start": "16:00",
+      "end": "18:00",
+      "type": "predavanje",
+      "location": "TFPU - Dvorana 314",
+      "desc": "Anizotropija čvrstoće, efekt stepenica, Gyroid ispuna i volumni protok."
+    },
+    {
+      "id": "ev-106",
+      "title": "Vježbe 3: Slicing u PrusaSliceru / OrcaSliceru i analiza G-koda",
+      "date": "2026-11-06",
+      "start": "18:00",
+      "end": "19:00",
+      "type": "vjezbe",
+      "location": "TFPU - Dvorana 312",
+      "desc": "Generiranje putanje alata, Tree potpore i izračun trajanja 3D tiska."
+    },
+    {
+      "id": "ev-107",
+      "title": "Predavanje (T7–T8): Kalibracija 3D pisača i 3D tisak personaliziranih modela",
+      "date": "2026-11-13",
+      "start": "16:00",
+      "end": "18:00",
+      "type": "predavanje",
+      "location": "TFPU - Dvorana 314",
+      "desc": "Z-offset, kalibracija E-koraka, Pressure Advance i individualizirane ortoze."
+    },
+    {
+      "id": "ev-108",
+      "title": "Vježbe 4: Praktična kalibracija 3D pisača i ispis testnih modela",
+      "date": "2026-11-13",
+      "start": "18:00",
+      "end": "19:00",
+      "type": "vjezbe",
+      "location": "TFPU - Dvorana 312",
+      "desc": "Praktična kalibracija prvog sloja, retrakcije i protoka."
+    },
+    {
+      "id": "ev-109",
+      "title": "Predavanje (T9–T11): Razvoj proizvoda, ekonomika serije i napredno 3D skeniranje (μCT)",
+      "date": "2026-11-20",
+      "start": "16:00",
+      "end": "18:00",
+      "type": "predavanje",
+      "location": "TFPU - Dvorana 314",
+      "desc": "TRL razine, točka pokrića (Break-even) i inspekcijska Color Map analiza odstupanja."
+    },
+    {
+      "id": "ev-110",
+      "title": "Vježbe 5: Inspekcijska analiza devijacije skeniranog modela u odnosu na CAD etalon",
+      "date": "2026-11-20",
+      "start": "18:00",
+      "end": "19:00",
+      "type": "vjezbe",
+      "location": "TFPU - Dvorana 312",
+      "desc": "Usporedba oblaka točaka i CAD modela (Color Map devijacije)."
+    },
+    {
+      "id": "ev-111",
+      "title": "Predavanje (T12–T13): Topološka optimizacija, TPMS strukture i MKE/kinematski proračuni",
+      "date": "2026-11-27",
+      "start": "16:00",
+      "end": "18:00",
+      "type": "predavanje",
+      "location": "TFPU - Dvorana 314",
+      "desc": "SIMP metoda, ortotropni FEM proračun i Print-in-Place tolerancije."
+    },
+    {
+      "id": "ev-112",
+      "title": "Vježbe 6: Topološka optimizacija i MKE proračun 3D tiskanog nosača",
+      "date": "2026-11-27",
+      "start": "18:00",
+      "end": "19:00",
+      "type": "vjezbe",
+      "location": "TFPU - Dvorana 312",
+      "desc": "Provedba strukturne analize i smanjenje mase modela uz faktor sigurnosti."
+    },
+    {
+      "id": "ev-113",
+      "title": "Predavanje (T14–T15): Budućnost AM-a (4D/5-osni tisak, Code-CAD) i Otvoreni kod (RepRap, Klipper)",
+      "date": "2026-12-04",
+      "start": "16:00",
+      "end": "18:00",
+      "type": "predavanje",
+      "location": "TFPU - Dvorana 314",
+      "desc": "Industrija 5.0, SDF modeliranje, CoreXY i arhitektura otvorenog koda."
+    },
+    {
+      "id": "ev-114",
+      "title": "Vježbe 7: Programsko 3D modeliranje (OpenSCAD) i napredne postavke u OrcaSliceru",
+      "date": "2026-12-04",
+      "start": "18:00",
+      "end": "19:00",
+      "type": "vjezbe",
+      "location": "TFPU - Dvorana 312",
+      "desc": "Izrada parametarskog modela kroz kod i priprema za brzi CoreXY ispis."
+    },
+    {
+      "id": "ev-115",
+      "title": "Provjera znanja / Kolokvij (Ishodi učenja I1–I6)",
+      "date": "2026-12-11",
+      "start": "16:00",
+      "end": "19:00",
+      "type": "ispit",
+      "location": "TFPU - Dvorana 314 / 312",
+      "desc": "Verifikacija očekivanih ishoda učenja I1–I6 na kolegiju Prototipno 3D modeliranje."
+    }
+  ]
+}
